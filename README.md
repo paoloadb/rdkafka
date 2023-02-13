@@ -1,0 +1,3 @@
+# rdkafka
+
+node-rdkafka POC
