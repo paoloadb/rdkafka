@@ -1,3 +1,3 @@
 # rdkafka
 
-node-rdkafka POC
+node-rdkafka producer, consumer, and streamconsumer POC
