@@ -1,5 +1,15 @@
 require('dotenv').config()
 const Kafka = require('node-rdkafka')
+const { SchemaRegistry } = require('@kafkajs/confluent-schema-registry')
+
+// Define schema registry configuration
+const registry = new SchemaRegistry({
+  host: process.env.SR_HOST,
+  auth: {
+    username: process.env.SR_KEY,
+    password: process.env.SR_SECRET
+  },
+})
 
 var cs = new Kafka.KafkaConsumer.createReadStream({
   'group.id': 'rnd-rdkafka',
@@ -18,9 +28,12 @@ var cs = new Kafka.KafkaConsumer.createReadStream({
     console.log('Ready');
   })
 
-  cs.on('data', (message) => {
+  cs.on('data', async (message) => {
     console.log('Got message');
-    console.log(message.value.toString());
+    // Decode the message value
+    const decodedMessage = await registry.decode(message.value);
+    // Output the actual message contents
+    console.log(decodedMessage);
   });
 
   cs.on('error', (err) => {
