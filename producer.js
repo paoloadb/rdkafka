@@ -38,10 +38,12 @@ try {
 producer.on('ready', async () => {
   console.log('Producer is ready');
 // Retrieve schema id and encode message
-  const schemaId = await registry.getLatestSchemaId("test_topic-value")
-  const encodedMessage = await registry.encode(schemaId, {name: 'pao', id: 1}) 
+  const schemaId = await registry.getLatestSchemaId("test_topic-value");
+  const encodedMessage = await registry.encode(schemaId, {name: 'pao', id: 1});
   // Send a message to the Kafka broker
   producer.produce('test_topic', null, Buffer.from(encodedMessage), null);
+  producer.disconnect();
+  console.log('Done');
   process.exit(0);
 });
 

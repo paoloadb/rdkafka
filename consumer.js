@@ -2,7 +2,9 @@ require('dotenv').config()
 const Kafka = require('node-rdkafka')
 const { SchemaRegistry } = require('@kafkajs/confluent-schema-registry')
 
-var consumer = new Kafka.KafkaConsumer({
+var rdk = Kafka 
+
+var consumer = new rdk.KafkaConsumer({
   'group.id': 'rnd-rdkafka',
   'metadata.broker.list': process.env.KAFKA_BROKER,
   'security.protocol': 'SASL_SSL',
