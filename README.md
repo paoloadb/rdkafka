@@ -1,3 +1,3 @@
 # rdkafka
 
-node-rdkafka producer, consumer, and streamconsumer POC
+My Proof of Concept code for node-rdkafka producer, consumer, and streamconsumer
